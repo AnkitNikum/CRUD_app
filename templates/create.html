@@ -1,0 +1,179 @@
+{% block head %}
+
+<title>Create_table</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+<head>
+
+<script>
+// function add(){
+//     $("form > p:nth-child(4)").clone(true).insertBefore("form > p:nth-child(4)");
+//     return false;
+// }
+
+function remove() {
+   // $("form > p:nth-child(4)").remove();
+    let l1 = document.getElementById("myf11");
+    l1.remove();
+}
+// function add1(){
+//     $("form > p:nth-last-child(3)").clone(true).insertBefore("form >p:nth-last-child(2)");
+//     return false;
+// }
+
+function remove1() {
+   // $("form > p:nth-last-child(3)").remove()
+   let l1 = document.getElementById("myf21");
+   l1.remove();}
+// FormGet Online Form Builder JS Code
+// Creating and Adding Dynamic Form Elements.
+var i = 2; // Global Variable for Name
+var j = 2; // Global Variable for E-mail
+/*
+=================
+Creating Text Box for name field in the Form.
+=================
+*/
+
+ function AttributeBoxCreate(){
+// let par =`<p id = "myf1${i}"> Attribute Name &nbsp &nbsp<input type="text" name = "Aname_${i}" >
+//               Data Type &nbsp &nbsp<input type="text" name = "dt_${i}">
+//               AUTO INCREMENT &nbsp &nbsp<input type="checkbox" name="auto_${i}" >
+//               Constraint (please don't enter foreign key) &nbsp &nbsp<input type="text" name = "con_${i}" >
+//             <button onclick="remove()" type="button">Remove</button><br><br></p>`;
+// document.getElementById("f1").innerHTML +=par;
+const para = document.createElement("p"); 
+para.id = "myf1" + i;
+var y = document.createElement("INPUT");
+var t = document.createTextNode("AttributeName "+'\xa0\xa0');
+y.setAttribute("type", "text");
+y.setAttribute("Placeholder", "AttributeName_" + i);
+y.setAttribute("Name", "Aname_" + i);
+para.appendChild(t);
+para.appendChild(y);
+t = document.createTextNode('\xa0\xa0'+"Datatype "+'\xa0\xa0');
+y = document.createElement("INPUT");
+y.setAttribute("type", "text");
+y.setAttribute("Placeholder", "Datatype_" + i);
+y.setAttribute("Name", "dt_" + i);
+para.appendChild(t);
+para.appendChild(y);
+t = document.createTextNode('\xa0\xa0'+"AUTO INCREMENT "+'\xa0\xa0');
+y = document.createElement("INPUT");
+y.setAttribute("type", "checkbox");
+y.setAttribute("Name", "auto_" + i);
+para.appendChild(t);
+para.appendChild(y);
+y = document.createElement("INPUT");
+t = document.createTextNode('\xa0\xa0'+"Constraint "+'\xa0\xa0');
+y.setAttribute("type", "text");
+y.setAttribute("Placeholder", "Constraint_" + i);
+y.setAttribute("Name", "con_" + i);
+para.appendChild(t);
+para.appendChild(y);
+let btn = document.createElement("button");
+btn.innerHTML = "Remove";
+btn.type = "button";
+btn.id = "b1"+i;
+btn.addEventListener('click', function handleClick(event) {
+  // 👇️ "parent"
+  const child = document.getElementById(btn.id);
+  console.log(btn.id)
+  let id1 = child.parentElement.id;
+  let l1 = document.getElementById(id1);
+    l1.remove()
+}); 
+//var b_1 = b.cloneNode(true)
+para.appendChild(btn);
+var br = document.createElement("br");
+para.appendChild(br);
+br = document.createElement("br");
+para.appendChild(br);
+document.getElementById("f1").appendChild(para);
+i++;
+}
+/*
+=================
+Creating Text Box for email field in the Form.
+=================
+*/
+function FKBoxCreate(){
+    // let par =`<p id = "myf2${j}">  Attribute Name &nbsp &nbsp<input type="text"  name = "Rname_${j}" >
+    //             Refrence Table &nbsp &nbsp<input type="text" name = "RT_${j}" >
+    //             Refrence attribute &nbsp &nbsp<input type="text" name = "RA_${j}" >
+    //           <button  onclick="remove1()" type="button">Remove</button><br><br></p>`;
+    // document.getElementById("f2").innerHTML +=par;
+    const para = document.createElement("p");
+    para.id = "myf2" + j;
+    var y = document.createElement("INPUT");
+    var t = document.createTextNode("AttributeName "+ '\xa0\xa0');
+    y.setAttribute("type", "text");
+    y.setAttribute("Placeholder", "refattrname_" + j);
+    y.setAttribute("Name", "Rname_" + j);
+    para.appendChild(t);
+    para.appendChild(y);
+    t = document.createTextNode('\xa0\xa0'+"Refrence Table "+'\xa0\xa0');
+    y = document.createElement("INPUT");
+    y.setAttribute("type", "text");
+    y.setAttribute("Placeholder", "refrencetable_" + j);
+    y.setAttribute("Name", "RT_" + j);
+    para.appendChild(t);
+    para.appendChild(y);
+    y = document.createElement("INPUT");
+    t = document.createTextNode('\xa0\xa0'+"Refrence attribute "+'\xa0\xa0');
+    y.setAttribute("type", "text");
+    y.setAttribute("Placeholder", "refattr_" + j);
+    y.setAttribute("Name", "RA_" + j);
+    para.appendChild(t);
+    para.appendChild(y);
+    let btn = document.createElement("button");
+    btn.innerHTML = "Remove";
+    btn.type = "button";
+    btn.id = "b2"+j;
+    btn.addEventListener('click', function handleClick(event) {
+  // 👇️ "parent"
+      const child = document.getElementById(btn.id);
+      console.log(btn.id)
+       let id1 = child.parentElement.id;
+       let l1 = document.getElementById(id1);
+       l1.remove()
+});
+//var b_1 = b.cloneNode(true)
+para.appendChild(btn);
+var br = document.createElement("br");
+para.appendChild(br);
+br = document.createElement("br");
+para.appendChild(br);
+document.getElementById("f2").appendChild(para);
+    j++;
+    }</script></head>
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Table Details</h1>
+
+    <div  class="form">
+        <form action="create" method="POST">
+         <p><label>Please enter your details</label><br>
+           Table Name &nbsp &nbsp<input type="text" name = "Table_name" ></p><br><br>
+        <div id="f1">
+          <p id = "myf11"> Attribute Name &nbsp &nbsp<input type="text" name = "Aname_1">
+              Data Type &nbsp &nbsp<input type="text" name = "dt_1">
+              AUTO INCREMENT &nbsp &nbsp<input type="checkbox" name="auto_1" >
+              Constraint (please don't enter foreign key) &nbsp &nbsp<input type="text" name = "con_1">
+            <button id="b1" onclick="remove()" type="button">Remove</button><br><br></p></div>
+            <p> <button  onclick="AttributeBoxCreate()" type="button">Add fields</button></p>
+          <p> <label>Please enter Foreign key Details</label><br></p>
+          <div id="f2">
+            <p id = "myf21">  Attribute Name &nbsp &nbsp<input type="text" name = "Rname_1">
+                Refrence Table &nbsp &nbsp<input type="text" name = "RT_1">
+                Refrence attribute &nbsp &nbsp<input type="text" name = "RA_1">
+              <button  onclick="remove1()" type="button">Remove</button><br><br></p></div>
+           <p> <button onclick="FKBoxCreate()" type="button">Add fields</button></p>
+
+          <p><input type="submit" value="Confirm"></p> 
+        </form>
+    </div>
+    
+</div>
+ 
+{% endblock %}

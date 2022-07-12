@@ -1,0 +1,31 @@
+
+
+
+{% block head %}
+
+<title>CRUD_App</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Enter DB Cred and Choose Your Operation</h1> <br>
+    <div class="form">
+        <form action="db_det" method="POST">
+            <label>Please enter DB details</label><br>
+            Hostname &nbsp &nbsp    <input type="text" name="host" id="host"></input><br><br><br>
+            Username &nbsp &nbsp   <input type="text" name="username" id="usr"></input><br><br><br>
+            Password &nbsp &nbsp <input type="text" name="Password" id="pwd"></input><br><br><br>
+            Database Name &nbsp &nbsp <input type="text" name="Database" id="db"></input><br><br><br>
+            Operation &nbsp&nbsp <select id="operation" name="operation">
+                <option value="Create">Create Table</option>
+                <option value="Insert">Insert data</option>
+                <option value="Update">Update data</option>
+                <option value="delete">Delete data or table</option>
+                <option value="show">Download or show table data</option>
+            </select><br><br><br>
+            <input type="submit" value="Confirm">
+        </form>
+    </div>
+</div>
+{% endblock %}

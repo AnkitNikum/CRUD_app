@@ -1,0 +1,76 @@
+
+{% block head %}
+
+<title>CRUD_App</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <div id = "div1"></div>
+    <!-- <h1 style="text-align: center">Please select the table you want to insert data in from {{db}}</h1> <br> -->
+    <div class="operation" id="div2">  
+    </div>
+</div>
+<script> 
+    var col_list1 = {{col_list|tojson}};
+    var tbl = '{{table_nm}}';
+    var where = '{{where}}';
+    var head_line = document.createElement("h1");
+    head_line.innerHTML = 'Please select the column you want to see in table: '+tbl;
+    head_line.style = "text-align: center"
+    document.getElementById("div1").appendChild(head_line);
+    document.getElementById("div1").appendChild(document.createElement("br"));
+    form1 = document.createElement("form")
+    form1.method = "POST"
+    form1.action = "show2"
+    select1 = document.createElement("select")
+    select1.id = "view_option"
+    select1.name = "view"
+    option1 = document.createElement("option")
+        option1.innerHTML = 'CSV'
+        option1.value = 'CSV'
+        select1.appendChild(option1) 
+    option1 = document.createElement("option")
+        option1.innerHTML = 'Show on screen'
+        option1.value = 'Show on screen'
+        select1.appendChild(option1)
+ 
+    col_list1.forEach(element => {
+           text_node = document.createTextNode(element+'\xa0\xa0')
+           option1 = document.createElement("input")
+           option1.setAttribute("type","checkbox")
+           option1.setAttribute("Name",element)
+           form1.appendChild(text_node)
+           form1.appendChild(option1)
+           text_node = document.createTextNode('\xa0\xa0')
+           form1.appendChild(text_node) 
+    });
+    form1.appendChild(select1)
+    text_node = document.createTextNode('\xa0\xa0'+'csv file path along with file name'+'\xa0\xa0')
+    option1 = document.createElement("input")
+    option1.setAttribute("type","text")
+    option1.setAttribute("Name","file_pth")
+    form1.appendChild(text_node)
+    form1.appendChild(option1)
+    option1 = document.createElement("input")
+    option1.setAttribute("type","hidden")
+    option1.setAttribute("value",where)
+    option1.setAttribute("Name","where")
+    form1.appendChild(option1)
+    option1 = document.createElement("input")
+    option1.setAttribute("type","hidden")
+    option1.setAttribute("value",tbl)
+    option1.setAttribute("Name","tbl_name")
+    form1.appendChild(option1)
+    var br = document.createElement("br");
+    form1.appendChild(br);
+    br = document.createElement("br");
+    form1.appendChild(br);
+    btn = document.createElement("button")
+    btn.innerHTML = "Submit"
+    btn.type = "submit"
+    form1.appendChild(btn)
+    document.getElementById("div2").appendChild(form1)
+</script>
+{% endblock %}

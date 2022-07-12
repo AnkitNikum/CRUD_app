@@ -1,0 +1,19 @@
+
+{% block head %}
+
+<title>CRUD_App</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h2 style="text-align: center">The following error occured during the operation:</h1> <br>
+    <div class="operation">
+        <h4 style="text-align: center">{{error}}</h1> <br>
+        <p>Click on the button to carry out new operation or go back on the last page to correct the errors.
+        </p><br>
+        <button type="button" onclick="window.location.href='/show3'">New Operation</button>
+    </div>
+</div>
+
+{% endblock %}

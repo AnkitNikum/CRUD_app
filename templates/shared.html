@@ -1,0 +1,22 @@
+
+{% block head %}
+
+<title>CRUD_App</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Please select your next your operation</h1> <br>
+    <div class="operation">
+
+             <form action="create1" method="GET" ><button type="submit" >CREATE NEW TABLE with same credentials</button></form><br><br>
+             <form action="new" method="GET" ><button type="submit" >CREATE NEW TABLE with new credentials</button></form><br><br>
+             <form action="insert1" method="GET"><input type="hidden" name = "opr" value="insert"></input>  <button type="submit">Insert data</button></form><br><br>
+             <form action="insert1" method="GET"><input type="hidden" name = "opr" value="update"></input>  <button  type="submit">Update data</button></form><br><br>
+             <form action="insert1" method="GET"><input type="hidden" name = "opr" value="delete"></input>  <button  type="submit">Delete data or table</button></form><br><br>
+             <form action="insert1" method="GET" ><input type="hidden" name = "opr" value="show"></input>  <button  type="submit">Download or show table data</button></form>     
+                <br><br><br>
+    </div>
+</div>
+{% endblock %}
