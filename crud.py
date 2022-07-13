@@ -173,6 +173,7 @@ def insert3():
     
      query = 'insert into ' + table_name+'('
      i=0
+     t=1
      for element in column_list:
         query = query + element+','
      query = query[:-1]
@@ -184,17 +185,25 @@ def insert3():
                query = query + request.form[element] +','
              else:
                query = query + 'null,'
+               t = t+1
            else:
              if request.form[element] != '':
                query = query + "'"+request.form[element]+"'"+','
              else:
                query = query + 'null,'
+               t = t+1
+           print(t)
+           print(len(column_list))
+           if(t == len(column_list)):
+             raise Exception('All Null Values Not Possible')
            if(i < len(column_list)-1):
              i = i + 1
            else:
              i = 0
+             t=1
              query = query[:-1]
              query = query + '),('
+        
      query = query[:-2] 
      print(query)   
      cursor =  mydb.cursor()
