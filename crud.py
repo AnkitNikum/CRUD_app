@@ -283,7 +283,10 @@ def update2():
        if (index[cnt] != 'Table_name') :
         if (i < len(column_list)) & (index[cnt][-1]!='o'):
             if((dt_list[i][0:3] == 'int')| (dt_list[i][0:5] == 'float')|(dt_list[i][0:8] == 'smallint')|(dt_list[i][0:7] == 'decimal')|(dt_list[i][0:7] == 'numeric')|(dt_list[i][0:4] == 'real')|(dt_list[i][0:6] =='double')|(dt_list[i][0:5] == 'money')|(dt_list[i][0:8] == 'smallmon')):
-              query = query +index[cnt][:-1]+'='+request.form[index[cnt]]+','
+              if (request.form[index[cnt]] == 'null')|(request.form[index[cnt]] == 'NaN'):
+                query = query +index[cnt][:-1]+'='+'null'+','
+              else:
+                query = query +index[cnt][:-1]+'='+request.form[index[cnt]]+','
             else:
               query = query +index[cnt][:-1]+"= '"+request.form[index[cnt]]+"',"
             i = i + 1
@@ -293,12 +296,12 @@ def update2():
           query = query + ' where '
           for m in range(len(column_list)):
             if((dt_list[m][0:3] == 'int')| (dt_list[m][0:5] == 'float')|(dt_list[m][0:8] == 'smallint')|(dt_list[m][0:7] == 'decimal')|(dt_list[m][0:7] == 'numeric')|(dt_list[m][0:4] == 'real')|(dt_list[m][0:6] =='double')|(dt_list[m][0:5] == 'money')|(dt_list[m][0:8] == 'smallmon')):
-              if request.form[index[cnt]] == 'null':
-               query = query +index[cnt][:-2]+' is '+request.form[index[cnt]]+' and '
+              if (request.form[index[cnt]] == 'null')|(request.form[index[cnt]] == 'NaN'):
+               query = query +index[cnt][:-2]+' is '+' null'+' and '
               else:
                 query = query +index[cnt][:-2]+'='+request.form[index[cnt]]+' and '
             else:
-              if request.form[index[cnt]] == 'null':
+              if (request.form[index[cnt]] == 'null'):
                query = query +index[cnt][:-2]+" is "+request.form[index[cnt]]+" and "
               else:
                query = query +index[cnt][:-2]+"='"+request.form[index[cnt]]+"' and "
@@ -311,7 +314,8 @@ def update2():
      query = query[:-l1]
      print(query)   
      cursor =  mydb.cursor()
-     cursor.execute(query,multi = True)
+     for _ in cursor.execute(query, multi=True): 
+       pass
      mydb.commit()   
      mydb.close()
      return render_template('shared.html')
